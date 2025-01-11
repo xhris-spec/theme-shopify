@@ -1,6 +1,5 @@
 {% comment %}
   Renders a list of product's price (regular, sale)
-
   Accepts:
   - product: {Object} Product Liquid object (optional)
   - placeholder: {Boolean} Renders a placeholder price (optional)
@@ -8,7 +7,6 @@
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
   - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
-
   Usage:
   {% render 'price', product: product %}
 {% endcomment %}
@@ -19,28 +17,27 @@
     assign target = product
   endif
 
-  assign compare_at_price = target.compare_at_price
-  assign price = target.price
+  assign compare_at_price = target.compare_at_price | times: 1
+  assign price = target.price | times: 1
 
-  {%- comment -%}
-  Personalización de precios basada en etiquetas de producto
-  {%- endcomment -%}
-  if product.tags contains "pack_basic"
-    assign price = 3499
-    assign compare_at_price = 4599
-  elsif product.tags contains "pack_intermediate"
-    assign price = 4999
-    assign compare_at_price = 5999
-  elsif product.tags contains "pack_premium"
-    assign price = 6999
-    assign compare_at_price = 8999
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_compare_at_price = compare_at_price | money_with_currency
+  else
+    assign money_price = price | money
+    assign money_compare_at_price = compare_at_price | money
   endif
 
-  {%- comment -%}
-  Conversión a formato monetario
-  {%- endcomment -%}
-  assign money_price = price | divided_by: 100.0 | money
-  assign money_compare_at_price = compare_at_price | divided_by: 100.0 | money
+  if product.tags contains "pack_basic"
+    assign money_price = 34.99 | money
+    assign money_compare_at_price = 45.99 | money
+  elsif product.tags contains "pack_intermediate"
+    assign money_price = 49.99 | money
+    assign money_compare_at_price = 59.99 | money
+  elsif product.tags contains "pack_premium"
+    assign money_price = 69.99 | money
+    assign money_compare_at_price = 89.99 | money
+  endif
 -%}
 
 {%- unless target == null -%}
