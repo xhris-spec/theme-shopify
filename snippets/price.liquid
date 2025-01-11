@@ -19,8 +19,8 @@
     assign target = product
   endif
 
-  assign compare_at_price = target.compare_at_price | times: 1
-  assign price = target.price | times: 1
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price
 
   {%- comment -%}
   Personalización de precios basada en etiquetas de producto
@@ -37,15 +37,10 @@
   endif
 
   {%- comment -%}
-  Conversión a formato monetario
+  Conversión a formato monetario y dividir entre 100
   {%- endcomment -%}
-  if settings.currency_code_enabled
-    assign money_price = price | divided_by: 100 | money_with_currency
-    assign money_compare_at_price = compare_at_price | divided_by: 100 | money_with_currency
-  else
-    assign money_price = price | divided_by: 100 | money
-    assign money_compare_at_price = compare_at_price | divided_by: 100 | money
-  endif
+  assign money_price = price | divided_by: 100 | money
+  assign money_compare_at_price = compare_at_price | divided_by: 100 | money
 -%}
 
 {%- unless target == null -%}
