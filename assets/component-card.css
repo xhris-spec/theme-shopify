@@ -310,14 +310,14 @@
 }
 
 .price__compare {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: gray;
   text-decoration: line-through;
 }
 
 .price__current {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 200;
   color: #333;
 }
 
