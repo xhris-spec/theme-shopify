@@ -1,15 +1,3 @@
-{% comment %}
-  Renders a list of product's price (regular, sale)
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - placeholder: {Boolean} Renders a placeholder price (optional)
-  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
-  - price_class: {String} Adds a price class to the price element (optional)
-  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
-  Usage:
-  {% render 'price', product: product %}
-{% endcomment %}
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
@@ -20,45 +8,47 @@
   assign compare_at_price = target.compare_at_price | times: 1
   assign price = target.price | times: 1
 
-  if settings.currency_code_enabled
-    assign money_price = price | money_with_currency
-    assign money_compare_at_price = compare_at_price | money_with_currency
-  else
-    assign money_price = price | money
-    assign money_compare_at_price = compare_at_price | money
+  {%- comment -%}
+  Personalización de precios basada en etiquetas de producto
+  {%- endcomment -%}
+  if product.tags contains "pack_basic"
+    assign price = 3499
+    assign compare_at_price = 4599
+  elsif product.tags contains "pack_intermediate"
+    assign price = 4999
+    assign compare_at_price = 5999
+  elsif product.tags contains "pack_premium"
+    assign price = 6999
+    assign compare_at_price = 8999
   endif
 
-  if product.tags contains "pack_basic"
-    assign money_price = 34.99 | money
-    assign money_compare_at_price = 45.99 | money
-  elsif product.tags contains "pack_intermediate"
-    assign money_price = 49.99 | money
-    assign money_compare_at_price = 59.99 | money
-  elsif product.tags contains "pack_premium"
-    assign money_price = 69.99 | money
-    assign money_compare_at_price = 89.99 | money
+  {%- comment -%}
+  Conversión a formato monetario dividiendo entre 100
+  {%- endcomment -%}
+  if settings.currency_code_enabled
+    assign money_price = price | divided_by: 100 | money_with_currency
+    assign money_compare_at_price = compare_at_price | divided_by: 100 | money_with_currency
+  else
+    assign money_price = price | divided_by: 100 | money
+    assign money_compare_at_price = compare_at_price | divided_by: 100 | money
   endif
 -%}
 
 {%- unless target == null -%}
   <div class="price">
     {%- if compare_at_price > price -%}
-      <div class="price__compare">
+      <span class="price__sale">
         <s class="price-item price-item--regular">
           {{ money_compare_at_price }}
         </s>
-      </div>
-      <div class="price__current">
         <span class="price-item price-item--sale">
           {{ money_price }}
         </span>
-      </div>
+      </span>
     {%- else -%}
-      <div class="price__current">
-        <span class="price-item price-item--regular">
-          {{ money_price }}
-        </span>
-      </div>
+      <span class="price__regular">
+        {{ money_price }}
+      </span>
     {%- endif -%}
   </div>
 {%- endunless -%}
