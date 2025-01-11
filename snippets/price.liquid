@@ -37,10 +37,10 @@
   endif
 
   {%- comment -%}
-  Conversión a formato monetario y dividir entre 100
+  Conversión a formato monetario
   {%- endcomment -%}
-  assign money_price = price | divided_by: 100 | money
-  assign money_compare_at_price = compare_at_price | divided_by: 100 | money
+  assign money_price = price | divided_by: 100.0 | money
+  assign money_compare_at_price = compare_at_price | divided_by: 100.0 | money
 -%}
 
 {%- unless target == null -%}
