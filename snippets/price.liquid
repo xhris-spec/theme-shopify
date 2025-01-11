@@ -19,8 +19,8 @@
     assign target = product
   endif
 
-  assign compare_at_price = target.compare_at_price
-  assign price = target.price | default: 1999
+  assign compare_at_price = target.compare_at_price | times: 1
+  assign price = target.price | times: 1
   assign money_price = price | money
 
   if settings.currency_code_enabled
@@ -28,52 +28,27 @@
   endif
 
   if product.tags contains "pack"
-    assign money_price = "€34.99"
-    assign compare_at_price = "€45.99"
+    assign money_price = "34.99"
+    assign compare_at_price = "45.99"
   endif
 -%}
 
 
-{%- unless target == null and placeholder == null -%}
-  <div
-    class="
-      price
-      {%- if price_class %} {{ price_class }}{% endif -%}
-      {%- if available == false %} price--sold-out{% endif -%}
-      {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
-      {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
-      {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
-      {%- if show_badges %} price--show-badge{% endif -%}
-    "
-  >
-    <div class="price__container">
-      <div class="price__regular">
-        <span class="price-item price-item--regular">
+{%- unless target == null -%}
+  <div class="price">
+    {%- if compare_at_price > price -%}
+      <span class="price__sale">
+        <s class="price-item price-item--regular">
+          {{ compare_at_price | money }}
+        </s>
+        <span class="price-item price-item--sale">
           {{ money_price }}
         </span>
-      </div>
-
-      {%- if compare_at_price > money_price -%}
-        <div class="price__sale">
-          <span>
-            <s class="price-item price-item--regular">
-              {{ compare_at_price }}
-            </s>
-          </span>
-          <span class="price-item price-item--sale">
-            {{ money_price }}
-          </span>
-        </div>
-      {%- endif -%}
-    </div>
-    {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
       </span>
-
-      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
+    {%- else -%}
+      <span class="price__regular">
+        {{ money_price }}
       </span>
     {%- endif -%}
   </div>
-{% endunless %}
+{%- endunless -%}
