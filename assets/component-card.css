@@ -340,12 +340,16 @@
 }
 
 .price {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  margin: 0.5rem 0; 
+  font-size: 1.6rem;
+  letter-spacing: .1rem;
+  line-height: calc(1 + .5 / var(--font-body-scale));
+  color: rgb(var(--color-foreground));
 }
 
+.price .price-item {
+  display: inline-block;
+  margin: 0 1rem 0 0;
+}
 .price__sale {
   display: flex;
   flex-direction: row; 
