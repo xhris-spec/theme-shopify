@@ -1,13 +1,22 @@
+{% comment %}
+  Renders a list of product's price (regular, sale)
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - placeholder: {Boolean} Renders a placeholder price (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
+  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+  Usage:
+  {% render 'price', product: product %}
+{% endcomment %}
 {%- liquid
-  if use_variant
+   if use_variant
     assign target = product.selected_or_first_available_variant
   else
     assign target = product
   endif
-
-  {%- comment -%}
-  Asignar precios personalizados basados en etiquetas
-  {%- endcomment -%}
+   
   if product.tags contains "pack_basic"
     assign price = 31
     assign compare_at_price = 4599
@@ -22,9 +31,17 @@
     assign compare_at_price = target.compare_at_price
   endif
 
-  {%- comment -%}
-  Conversión a formato monetario
-  {%- endcomment -%}
+  if product.tags contains "pack_basic"
+    assign money_price = 34.99 | money
+    assign money_compare_at_price = 45.99 | money
+  elsif product.tags contains "pack_intermediate"
+    assign money_price = 49.99 | money
+    assign money_compare_at_price = 59.99 | money
+  elsif product.tags contains "pack_premium"
+    assign money_price = 69.99 | money
+    assign money_compare_at_price = 89.99 | money
+  endif
+   
   assign money_price = price | divided_by: 100 | money
   assign money_compare_at_price = compare_at_price | divided_by: 100 | money
 -%}
@@ -47,7 +64,6 @@
     {%- endif -%}
   </div>
 {%- endunless -%}
-
 
 
 {%- unless target == null -%}
