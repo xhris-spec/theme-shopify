@@ -28,11 +28,10 @@
   endif
 
   if product.tags contains "pack"
-    assign money_price = "34.99"
-    assign compare_at_price = "45.99"
+    assign money_price = 34.99 | times: 1
+    assign compare_at_price = 45.99 | times: 1
   endif
 -%}
-
 
 {%- unless target == null -%}
   <div class="price">
@@ -42,12 +41,12 @@
           {{ compare_at_price | money }}
         </s>
         <span class="price-item price-item--sale">
-          {{ money_price }}
+          {{ money_price | money }}
         </span>
       </span>
     {%- else -%}
       <span class="price__regular">
-        {{ money_price }}
+        {{ money_price | money }}
       </span>
     {%- endif -%}
   </div>
