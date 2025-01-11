@@ -15,8 +15,6 @@
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
-  elsif placeholder
-    assign target = null
   else
     assign target = product
   endif
@@ -29,12 +27,12 @@
     assign money_price = price | money_with_currency
   endif
 
-  <!-- Condición para packs -->
   if product.tags contains "pack"
-    assign money_price = "€34.99" 
+    assign money_price = "€34.99"
     assign compare_at_price = "€45.99"
   endif
 -%}
+
 
 {%- unless target == null and placeholder == null -%}
   <div
