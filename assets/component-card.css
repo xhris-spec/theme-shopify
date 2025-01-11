@@ -309,6 +309,19 @@
   margin-bottom: 0;
 }
 
+.price__compare {
+  font-size: 0.9rem;
+  color: gray;
+  text-decoration: line-through;
+}
+
+.price__current {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {
