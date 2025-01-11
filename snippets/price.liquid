@@ -31,14 +31,14 @@
   endif
 
   if product.tags contains "pack_basic"
-    assign money_price = 34.99 | money
-    assign money_compare_at_price = 45.99 | money
+    assign money_price = 34,99 | money
+    assign money_compare_at_price = 45,99 | money
   elsif product.tags contains "pack_intermediate"
-    assign money_price = 49.99 | money
-    assign money_compare_at_price = 59.99 | money
+    assign money_price = 49,99 | money
+    assign money_compare_at_price = 59,99 | money
   elsif product.tags contains "pack_premium"
-    assign money_price = 69.99 | money
-    assign money_compare_at_price = 89.99 | money
+    assign money_price = 69,99 | money
+    assign money_compare_at_price = 89,99 | money
   endif
 -%}
 
