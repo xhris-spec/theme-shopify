@@ -42,26 +42,24 @@
 
 {%- unless target == null -%}
   <div class="price">
-    <div class="price__regular">
-      {%- if compare_at_price > price -%}
-        <div class="price__compare">
-          <s class="price-item price-item--regular variant-item__old-price">
-            {{ money_compare_at_price }}
-          </s>
-        </div>
-        <div class="price__current">
-          <span class="price-item price-item--regular">
-            {{ money_price }}
-          </span>
-        </div>
-      {%- else -%}
-        <div class="price__current">
-          <span class="price-item price-item--regular">
-            {{ money_price }}
-          </span>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if compare_at_price > price -%}
+      <div class="price__compare">
+        <s class="price-item price-item--regular">
+          {{ money_compare_at_price }}
+        </s>
+      </div>
+      <div class="price__current">
+        <span class="price-item price-item--regular">
+          {{ money_price }}
+        </span>
+      </div>
+    {%- else -%}
+      <div class="price__current">
+        <span class="price-item price-item--regular">
+          {{ money_price }}
+        </span>
+      </div>
+    {%- endif -%}
   </div>
 {%- endunless -%}
 
