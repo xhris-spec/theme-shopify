@@ -11,24 +11,21 @@
   {% render 'price', product: product %}
 {% endcomment %}
 {%- liquid
-   if use_variant
+  if use_variant
     assign target = product.selected_or_first_available_variant
   else
     assign target = product
   endif
-   
-  if product.tags contains "pack_basic"
-    assign price = 3499
-    assign compare_at_price = 4599
-  elsif product.tags contains "pack_intermediate"
-    assign price = 4999
-    assign compare_at_price = 5999
-  elsif product.tags contains "pack_premium"
-    assign price = 6999
-    assign compare_at_price = 8999
+
+  assign compare_at_price = target.compare_at_price | times: 1
+  assign price = target.price | times: 1
+
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_compare_at_price = compare_at_price | money_with_currency
   else
-    assign price = target.price
-    assign compare_at_price = target.compare_at_price
+    assign money_price = price | money
+    assign money_compare_at_price = compare_at_price | money
   endif
 
   if product.tags contains "pack_basic"
@@ -41,26 +38,27 @@
     assign money_price = 69.99 | money
     assign money_compare_at_price = 89.99 | money
   endif
-   
-  assign money_price = price | divided_by: 100 | money
-  assign money_compare_at_price = compare_at_price | divided_by: 100 | money
 -%}
 
 {%- unless target == null -%}
   <div class="price">
     {%- if compare_at_price > price -%}
-      <span class="price__sale">
+      <div class="price__compare">
         <s class="price-item price-item--regular">
           {{ money_compare_at_price }}
         </s>
+      </div>
+      <div class="price__current">
         <span class="price-item price-item--sale">
           {{ money_price }}
         </span>
-      </span>
+      </div>
     {%- else -%}
-      <span class="price__regular">
-        {{ money_price }}
-      </span>
+      <div class="price__current">
+        <span class="price-item price-item--regular">
+          {{ money_price }}
+        </span>
+      </div>
     {%- endif -%}
   </div>
 {%- endunless -%}
