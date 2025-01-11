@@ -43,18 +43,22 @@
 {%- unless target == null -%}
   <div class="price">
     {%- if compare_at_price > price -%}
-      <span class="price__sale">
+      <div class="price__compare">
         <s class="price-item price-item--regular">
           {{ money_compare_at_price }}
         </s>
+      </div>
+      <div class="price__current">
         <span class="price-item price-item--sale">
           {{ money_price }}
         </span>
-      </span>
+      </div>
     {%- else -%}
-      <span class="price__regular">
-        {{ money_price }}
-      </span>
+      <div class="price__current">
+        <span class="price-item price-item--regular">
+          {{ money_price }}
+        </span>
+      </div>
     {%- endif -%}
   </div>
 {%- endunless -%}
