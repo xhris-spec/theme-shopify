@@ -5,11 +5,8 @@
     assign target = product
   endif
 
-  assign compare_at_price = target.compare_at_price | times: 1
-  assign price = target.price | times: 1
-
   {%- comment -%}
-  Personalización de precios basada en etiquetas de producto
+  Asignar precios personalizados basados en etiquetas
   {%- endcomment -%}
   if product.tags contains "pack_basic"
     assign price = 3499
@@ -20,18 +17,16 @@
   elsif product.tags contains "pack_premium"
     assign price = 6999
     assign compare_at_price = 8999
+  else
+    assign price = target.price
+    assign compare_at_price = target.compare_at_price
   endif
 
   {%- comment -%}
-  Conversión a formato monetario dividiendo entre 100
+  Conversión a formato monetario
   {%- endcomment -%}
-  if settings.currency_code_enabled
-    assign money_price = price | divided_by: 100 | money_with_currency
-    assign money_compare_at_price = compare_at_price | divided_by: 100 | money_with_currency
-  else
-    assign money_price = price | divided_by: 100 | money
-    assign money_compare_at_price = compare_at_price | divided_by: 100 | money
-  endif
+  assign money_price = price | divided_by: 100 | money
+  assign money_compare_at_price = compare_at_price | divided_by: 100 | money
 -%}
 
 {%- unless target == null -%}
@@ -52,6 +47,7 @@
     {%- endif -%}
   </div>
 {%- endunless -%}
+
 
 
 {%- unless target == null -%}
