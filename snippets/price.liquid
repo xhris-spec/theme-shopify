@@ -34,6 +34,9 @@
   elsif product.tags contains "pack_intermedio"
     assign money_price = 2999 | money
     assign money_compare_at_price = 3999 | money
+   elsif product.tags contains "pack_animal"
+    assign money_price = 1499 | money
+    assign money_compare_at_price = 1999 | money
   elsif product.tags contains "pack_premium"
     assign money_price = 6999 | money
     assign money_compare_at_price = 8999 | money
