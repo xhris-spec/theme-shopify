@@ -158,3 +158,10 @@
     {%- endif -%}
   </div>
 </div>
+
+{% if collection.handle == "all" %}
+  <script>
+    window.location.href = "/";
+  </script>
+{% endif %}
+
