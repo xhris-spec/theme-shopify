@@ -163,6 +163,8 @@
                   {{ "Pack Intermedio - Glow Boost" }}
               {%- elsif card_product.tags contains "pack_hydration" -%}
                   {{ "Pack Intermedio - Hydration Kit" }}
+              {%- elsif card_product.tags contains "pack_luxury" -%}
+                  {{ "Pack Premium - Luxury Repair" }}
               {%- else -%}
                 {{ card_product.title | escape }}
               {%- endif -%}
