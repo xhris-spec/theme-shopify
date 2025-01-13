@@ -161,6 +161,8 @@
                   {{ "Pack Básico - Essential Duo" }}
               {%- elsif card_product.tags contains "pack_intermedio" -%}
                   {{ "Pack Intermedio - Glow Boost" }}
+              {%- elsif card_product.tags contains "pack_hydration" -%}
+                  {{ "Pack Intermedio - Hydration Kit" }}
               {%- else -%}
                 {{ card_product.title | escape }}
               {%- endif -%}
