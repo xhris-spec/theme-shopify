@@ -159,9 +159,11 @@
             >
               {%- if card_product.tags contains "pack_basic" -%}
                   {{ "Pack Básico - Essential Duo" }}
-                {%- else -%}
-                  {{ card_product.title | escape }}
-                {%- endif -%}
+              {%- elsif card_product.tags contains "pack_intermedio" -%}
+                  {{ "Pack Intermedio - Glow Boost" }}
+              {%- else -%}
+                {{ card_product.title | escape }}
+              {%- endif -%}
             </a>
           </h3>
           <div class="card-information">
