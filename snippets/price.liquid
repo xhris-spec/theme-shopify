@@ -37,6 +37,9 @@
   elsif product.tags contains "pack_animals"
     assign money_price = 1499 | money
     assign money_compare_at_price = 1999 | money
+   elsif product.tags contains "pack_hydration"
+    assign money_price =  2999| money
+    assign money_compare_at_price = 4998 | money
   endif
 -%}
 
