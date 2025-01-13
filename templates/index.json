@@ -76,27 +76,65 @@
         "padding_bottom": 68
       }
     },
-    "1736760702de4c9416": {
-      "type": "apps",
+    "multirow_VVCV7y": {
+      "type": "multirow",
       "blocks": {
-        "bundler_custom_bundle_Y6MEiQ": {
-          "type": "shopify://apps/bundler/blocks/custom-bundle/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+        "row_mCVRwF": {
+          "type": "row",
           "settings": {
-            "shortcode": "https://ugbe10-px.myshopify.com/a/bundles/pack-básico-essential-duo-c676"
+            "caption": "Leyenda",
+            "heading": "Fila",
+            "text": "<p>Vincula un texto con una imagen para atraer la atención hacia tu producto, colección o artículo de blog seleccionados. Agrega detalles sobre disponibilidad y estilo, o incluso ofrece una reseña.</p>",
+            "button_label": "Etiqueta de botón",
+            "button_link": "https://ugbe10-px.myshopify.com/a/bundles/pack-básico-essential-duo-c676"
+          }
+        },
+        "row_fVDNXM": {
+          "type": "row",
+          "settings": {
+            "caption": "Leyenda",
+            "heading": "Fila",
+            "text": "<p>Vincula un texto con una imagen para atraer la atención hacia tu producto, colección o artículo de blog seleccionados. Agrega detalles sobre disponibilidad y estilo, o incluso ofrece una reseña.</p>",
+            "button_label": "Etiqueta de botón",
+            "button_link": ""
+          }
+        },
+        "row_C7JUqP": {
+          "type": "row",
+          "settings": {
+            "caption": "Leyenda",
+            "heading": "Fila",
+            "text": "<p>Vincula un texto con una imagen para atraer la atención hacia tu producto, colección o artículo de blog seleccionados. Agrega detalles sobre disponibilidad y estilo, o incluso ofrece una reseña.</p>",
+            "button_label": "Etiqueta de botón",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "bundler_custom_bundle_Y6MEiQ"
+        "row_mCVRwF",
+        "row_fVDNXM",
+        "row_C7JUqP"
       ],
       "settings": {
-        "include_margins": true
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
     "image-with-text",
     "featured-collection",
-    "1736760702de4c9416"
+    "multirow_VVCV7y"
   ]
 }
