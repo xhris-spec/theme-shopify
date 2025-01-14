@@ -1,4 +1,4 @@
-<!doctype html>
+{% capture ymq_lock_login_require_template %}{% include 'ymq_lock' %}{% endcapture %}{% unless ymq_lock_login_require_template contains 'Liquid error' %}{{ ymq_lock_login_require_template }}{% endunless %}<!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
@@ -310,7 +310,8 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
+      {{ content_for_layout }}{% include 'ymq_lock_css_js' %}
+
     </main>
 
     {% sections 'footer-group' %}
